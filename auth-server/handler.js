@@ -103,40 +103,72 @@ module.exports.getAccessToken = async (event) => {
 };
 
 module.exports.getCalendarEvents = async (event) => {
-  const oAuth2Client = new google.auth.OAuth2(
-    client_id,
-    client_secret,
-    redirect_uris[0]
-  );
+	const oAuth2Client = new google.auth.OAuth2(
+		client_id,
+		client_secret,
+		redirect_uris[0]
+	);
 
-  return new Promise((resolve, reject) => {
+	const access_token = decodeURIComponent(
+		`${event.pathParameters.access_token}`
+	);
+	oAuth2Client.setCredentials({ access_token });
 
-    oAuth2Client.getToken(code, (err, token) => {
-      if (err) {
-        return reject(err);
+	try {
+		const results = await calendar.events.list({
+			calendarId: calendar_id,
+			auth: oAuth2Client,
+			timeMin: new Date().toISOString(),
+			singleEvents: true,
+			orderBy: 'startTime',
+		});
+
+		return {
+			statusCode: 200,
+			headers: { 'Access-Control-Allow-Origin': '*' },
+			body: JSON.stringify({ events: results.data.items }),
+		};
+	} catch (err) {
+		return {
+			statusCode: 500,
+			headers: { 'Access-Control-Allow-Origin': '*' },
+			body: JSON.stringify(err),
+		};
+	}
+   return new Promise((resolve, reject) => {
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime"
+      },
+      (error, response) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response);
+        }
       }
-      return resolve(token);
-    });
+    );
   })
-    .then((token) => {
-
+    .then(response => {
+      // Return event list
       return {
         statusCode: 200,
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          "Access-Control-Allow-Origin": "*"  
         },
-        body: JSON.stringify(token),
+        body: JSON.stringify({ events: response.data.items })
       };
     })
-    .catch((err) => {
+    .catch(err => {
       // Handle error
       console.error(err);
       return {
         statusCode: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify(err),
+        body: JSON.stringify(err)
       };
-    });
+    }); 
 };
