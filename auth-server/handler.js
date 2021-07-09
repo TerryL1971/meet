@@ -29,14 +29,7 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
-/**
- *
- * The first step in the OAuth process is to generate a URL so users can log in with
- * Google and be authorized to see your calendar. After logging in, they’ll receive a code
- * as a URL parameter.
- *
- */
-
+// getAuthURL function
 module.exports.getAuthURL = async () => {
 	/*
 	 * Scopes arrays passed to the "scope" option. Any scopes passed must be enabled in the
@@ -58,7 +51,7 @@ module.exports.getAuthURL = async () => {
 	};
 };
 
-
+// getAccessToken function
 module.exports.getAccessToken = async (event) => {
 // The values used to instantiate the OAuthClient are at the top of the file
   const oAuth2Client = new google.auth.OAuth2(
@@ -102,6 +95,7 @@ module.exports.getAccessToken = async (event) => {
     });
 };
 
+// getCalendarEvents function
 module.exports.getCalendarEvents = async (event) => {
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
