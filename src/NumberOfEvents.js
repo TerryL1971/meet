@@ -8,7 +8,8 @@ class NumberOfEvents extends Component {
 					id='event-number'
 					type='number'
 					defaultValue={this.props.number}
-					onChange={(e) => this.props.updateNumber(e.target.value)}></input>
+					onChange={(e) => this.props.updateNumber(e.target.value)}>
+        </input>
 			</div>
 		);
 	}
