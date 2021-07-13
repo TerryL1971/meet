@@ -3,30 +3,21 @@ import axios from 'axios';
 import NProgress from 'nprogress';
 
 
-/**
- *
-*   @param {*} events:
-*   The following function should be in the “api.js” file.
-*   This function takes an events array, then uses map to create a new array with only locations.
-*   It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
-*   The Set will remove all duplicates from the array.
- */
-
 export const extractLocations = (events) => {
   var extractLocations = events.map((event) => event.location);
   var locations = [...new Set(extractLocations)];
   return locations;
 };
 
-const checkToken = async (accessToken) => {
-  const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  )
-    .then((res) => res.json())
-    .catch((error) => error.json());
+  const checkToken = async (accessToken) => {
+    const result = await fetch(
+      `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    )
+      .then((res) => res.json())
+      .catch((error) => error.json());
 
-  return result;
-};
+    return result;
+  };
 
 export const getEvents = async () => {
   NProgress.start();
@@ -35,7 +26,7 @@ export const getEvents = async () => {
     NProgress.done();
     return mockData;
   }
-
+  
   const token = await getAccessToken();
 
   if (token) {
@@ -50,6 +41,22 @@ export const getEvents = async () => {
     NProgress.done();
     return result.data.events;
   }
+};
+
+  const getToken = async (code) => {
+  const encodeCode = encodeURIComponent(code);
+  const { access_token } = await fetch(
+    'https://zp7gns73bb.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => error);
+
+    access_token && localStorage.setItem("access_token", access_token);
+
+    return access_token;
+  };
 
   const removeQuery = () => {
     if (window.history.pushState && window.location.pathname) {
@@ -64,7 +71,7 @@ export const getEvents = async () => {
       window.history.pushState("", "", newurl);
     }
   };
-};
+
 
 export const getAccessToken = async () => {
   const accessToken = localStorage.getItem('access_token');
@@ -84,19 +91,4 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-} 
-
-const getToken = async (code) => {
-  const encodeCode = encodeURIComponent(code);
-  const { access_token } = await fetch(
-    'https://zp7gns73bb.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .catch((error) => error);
-
-  access_token && localStorage.setItem("access_token", access_token);
-
-  return access_token;
-};
+}
