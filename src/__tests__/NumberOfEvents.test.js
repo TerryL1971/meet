@@ -6,7 +6,7 @@ import NumberOfEvents from '../NumberOfEvents';
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
 	beforeAll(() => {
-		NumberOfEventsWrapper = shallow(<NumberOfEvents eventsNumber={'10'} />);
+		NumberOfEventsWrapper = shallow(<NumberOfEvents eventsNumber={'8'} />);
 	});
 
 	test('renders input field for number of events', () => {
