@@ -28,7 +28,7 @@ class App extends Component {
     this.setState({
         numberOfEvents: numberOfEvents
     });
-  }
+  } 
 
   componentDidMount() {
     this.mounted = true;
