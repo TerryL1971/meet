@@ -34,7 +34,7 @@ describe('<Event /> component', () => {
 			optionsDate
 		);
 		const datetimeElement = EventWrapper.find('.date-time');
-		expect(datetimeElement.text()).toBe(`${date} - ${time}`);
+		expect(datetimeElement.text()).toBe(`${date} - Starting at:  ${time}`);
 	});
 
 	test('renders the location of the event', () => {
