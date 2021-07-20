@@ -3,21 +3,26 @@ import { shallow } from 'enzyme';
 import { mockData } from '../mock-data';
 import NumberOfEvents from '../NumberOfEvents';
 
-describe('<NumberOfEvents /> component', () => {
+
+describe('<NumberOfEvents/> component', () => {
   let NumberOfEventsWrapper;
-	beforeAll(() => {
-		NumberOfEventsWrapper = shallow(<NumberOfEvents eventsNumber={'8'} />);
-	});
+  beforeAll(() => {
+    NumberOfEventsWrapper = shallow(<NumberOfEvents eventsNumber={'8'} />);
+  });
 
-	test('renders input field for number of events', () => {
-		expect(NumberOfEventsWrapper.find('#event-number')).toHaveLength(1);
-	});
+  test('render text input', () => {
+    expect(NumberOfEventsWrapper.find('.event-number-input')).toHaveLength(1);
+  });
 
-	test('has a default input value', () => {
-		const number = NumberOfEventsWrapper.instance().props.numberOfEvents;
-		expect(NumberOfEventsWrapper.find('#event-number').props().value).toBe(
-			number
-		);
-	});
+  test('render text correctly', () => {
+    const number = NumberOfEventsWrapper.state('numberDisplayed');
+    expect(NumberOfEventsWrapper.find('.event-number-input').prop('value')).toBe(number);
+  });
 
+  test('change state when input changes', () => {
+    NumberOfEventsWrapper.setState({
+      numberOfEvents: 8
+		});
+	});
+    
 });
