@@ -1,14 +1,5 @@
 import React, { Component } from "react";
 
-/* class Event extends Component {
-  render() {
-    const event = this.props.event
-    return <div>
-              <h2>{event.kind}</h2>
-           </div>;
-  }
-} */
-
 class Event extends Component {
 	state = {
 			buttonLabel: 'Show Details',
