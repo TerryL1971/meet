@@ -10,9 +10,10 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32
+    numberOfEvents: 32,
+    currentCity: "all"
   }
-  
+
   updateNumber = (numberOfEvents) => {
     this.setState({
         numberOfEvents: numberOfEvents
