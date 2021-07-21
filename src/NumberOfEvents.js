@@ -12,17 +12,14 @@ class NumberOfEvents extends Component {
     if (value < 1) {
       return this.setState({
         numberDisplayed: '',
-        errorText: 'Please select a number between 1 and 32',
       });
     } else if (value > 32) {
       return this.setState({
         numberDisplayed: '',
-        errorText: 'Please select a number between 1 and 32',
       });
     } else {
       this.setState({
         numberDisplayed: value,
-        errorText: '',
       });
     }
   };
