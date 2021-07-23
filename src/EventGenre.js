@@ -25,7 +25,7 @@ const EventGenre = ({ events }) => {
   }, [events]);
 
   const chartColors = ['#44ddd1', '#eb85ee', '#9daee0', '#28857d', '#6e6089', '#61b0c5'];
-
+  
   return (
     <ResponsiveContainer height={400}>
       <PieChart width={400} height={400}>
@@ -49,7 +49,7 @@ const EventGenre = ({ events }) => {
               stroke={chartColors[index]} />
           ))
           }
-          
+
         </Pie>
       </PieChart>
     </ResponsiveContainer>
