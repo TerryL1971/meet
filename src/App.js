@@ -84,32 +84,25 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.showWelcomeScreen === undefined) return <div
-    className="App" />
-    const { numberDisplayed } = this.state;
+    const { locations, numberOfEvents, numberDisplayed } = this.state;
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
     console.log(this.state.numberOfEvents)
-    const { locations, numberOfEvents } = this.state;
+    
     return (
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents numberDisplayed={numberDisplayed} updateEvents={this.updateEvents} />
+        <NumberOfEvents numberDisplayed={numberDisplayed} updateEvents={this.updateEvents} /><br />
         <h4>Events in each city</h4>
-        <ResponsiveContainer width="100%" height="100%">
-        <ScatterChart
-          width={400}
-          height={400}
-          margin={{
-            top: 20, right: 20, bottom: 20, left: 20,
-          }}
-        >
-          <CartesianGrid />
-          <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-          <YAxis type="number" dataKey="y" name="weight" unit="kg" />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Scatter data={this.getData()} fill="#8884d8" />
-        </ScatterChart>
+        <ResponsiveContainer height={400} >
+          <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis type="category" dataKey="city" name="city" />
+            <YAxis allowDecimals={false} type="number" dataKey="number" name="number of events" />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter data={this.getData()} fill="#8884d8" />
+          </ScatterChart>
         </ResponsiveContainer>
         <EventList events={this.state.events} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
