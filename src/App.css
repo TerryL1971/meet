@@ -97,10 +97,10 @@ input[type="number"] {
   padding: 15px 15px 15px;
   margin-bottom: 10px;
   text-align: left;
-  border: 2px solid #0f78af;
+  border: 2px solid #7F8297;
   border-radius: 6px;
   position: relative;
-  background-color: #0f78af;
+  background-color: #7F8297;
 }
 
 #event-card{
