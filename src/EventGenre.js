@@ -36,7 +36,7 @@ const EventGenre = ({ events }) => {
           labelLine={false}
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
+          fill= 'chartColors'
           paddingAngle={5}
           dataKey="value"
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
