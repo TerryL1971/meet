@@ -1,6 +1,6 @@
 # Meet
 
-![Meet App](meet/img/meetApp.gif)
+![Meet App](img/MeetApp.gif)
 
 ## Objective
 
