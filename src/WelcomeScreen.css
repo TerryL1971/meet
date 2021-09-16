@@ -6,11 +6,11 @@ top: 0;
 background: white;
 }
 .login-button {
-color: #494949;
+color: #6E77B0;
 text-transform: uppercase;
 text-decoration: none;
 background: #ffffff;
-border: 4px solid #494949;
+border: 4px solid #6E77B0;
 display: inline-block;
 transition: all 0.4s ease 0s;
 min-width: 10rem;
@@ -20,15 +20,15 @@ margin: 1rem;
 width: 184px;
 height: 42px;
 margin: 1rem;
-background-color: #4285f4;
+background-color: #4285F4;
 border-radius: 2px;
 box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
 .google-btn:hover {
-box-shadow: 0 0 6px #4285f4;
+box-shadow: 0 0 6px #4285F4;
 }
 .google-btn:active {
-background: #1669f2;
+background: #1669F2;
 }
 .google-icon-wrapper {
 position: absolute;
